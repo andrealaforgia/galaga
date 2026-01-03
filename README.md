@@ -1,90 +1,193 @@
-# Galaga Clone
+# Galaga
 
-A classic arcade game remake of Galaga built from scratch in C using SDL2.
+A faithful recreation of the classic 1981 Namco arcade game, built with C and SDL2. Command your fighter ship against waves of alien enemies in their distinctive formation attack patterns. Features authentic sprite graphics, smooth animations, collision detection, and the addictive gameplay that made Galaga an arcade legend.
 
-## Features
+## Setup
 
-- **Authentic Galaga Gameplay**: Classic shoot 'em up action with a modern implementation
-- **Player Ship**: Smooth horizontal movement with responsive controls
-- **Enemy Formation**: 6×4 grid of enemies with 4 different types
-- **Animated Sprites**: Enemy sprites cycle through 2 animation frames
-- **Dynamic Movement**: Enemies oscillate left and right in formation
-- **Combat System**:
-  - Shoot bullets with rapid fire capability
-  - Collision detection between bullets and enemies
-  - Explosion animations with 5 frames
-- **Sound Effects**:
-  - Shooting sound when firing bullets
-  - Explosion sound when destroying enemies
-- **Graphics**:
-  - Original Galaga sprite sheet
-  - Black transparency for clean sprite rendering
-  - 288×224 native resolution (classic arcade dimensions)
-  - Automatic scaling to 90% of screen height while maintaining aspect ratio
+This project uses a git submodule for the game engine. The setup process will automatically initialize the submodule.
 
-## Prerequisites
-
-### macOS
-```bash
-brew install sdl2 sdl2_image sdl2_mixer
+### Install dependencies
+```
+make install
 ```
 
-### Linux (Ubuntu/Debian)
-```bash
-sudo apt-get update
-sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev
+This will initialize the git submodules and install SDL2 dependencies.
+
+### Development tools (optional)
+
+For linting and formatting:
+```
+make dev_install
 ```
 
-## Building
+This installs development tools (cpplint, clang-format).
 
-1. Clone the repository with submodules:
-```bash
-git clone --recursive <repository-url>
-cd galaga
+## Build the game
+```
+make clean && make
 ```
 
-2. Build the game:
-```bash
-make
+### Show run options
+```
+./galaga --help
 ```
 
-3. Run the game:
-```bash
+## Run the game
+```
 ./galaga
 ```
 
-## Controls
+### Run the game with custom options
 
-- **LEFT/RIGHT Arrow Keys**: Move the ship horizontally
-- **SPACE**: Fire bullets
-- **ESC**: Quit the game
-
-## Command Line Options
-
-```bash
-./galaga [OPTIONS]
-
-Options:
-  --help              Show help message
-  --display=N         Use display N (default: 0)
-  --vsync             Enable vertical sync
-  --fps=N             Set target FPS (default: 60)
-  --volume=N          Set audio volume 0-128 (default: 32)
-  --show-fps          Display FPS counter
-  --graphics-info     Show graphics capabilities
+Example: Running the game with FPS display and custom volume:
+```
+./galaga --show-fps --volume=128
 ```
 
-### Examples
+### VSync (Vertical Synchronization)
 
-Run with maximum volume:
-```bash
-./galaga --volume=128
+VSync synchronizes the game's frame rendering with your display's refresh rate to eliminate screen tearing and provide smoother visuals.
+
+**Default:** VSync is **disabled** by default for maximum performance and minimal input latency.
+
+**Enable VSync:**
+```
+./galaga --vsync
 ```
 
-Run with VSync enabled and FPS counter:
-```bash
-./galaga --vsync --show-fps
+**When to use VSync:**
+- You notice screen tearing (horizontal lines across the screen during fast movement)
+- You prefer smoother, more consistent frame pacing
+- Your system easily maintains 60+ FPS
+
+**When to disable VSync (default):**
+- You want the absolute lowest input latency for responsive controls
+- You have a variable refresh rate display (FreeSync/G-Sync/Adaptive Sync)
+- You're experiencing stuttering or performance issues with VSync enabled
+- You prefer higher framerates over perfect frame synchronization
+
+**Technical details:**
+- VSync caps the framerate at your display's refresh rate (typically 60 FPS)
+- Without VSync, the game uses manual frame limiting to target 60 FPS
+- VSync adds ~1-2 frames of input latency but eliminates tearing
+- On high-refresh-rate displays (120Hz+), VSync will cap at the higher rate
+
+**Example - VSync enabled:**
 ```
+./galaga --vsync
+```
+
+### FPS Display
+
+Display real-time frames-per-second statistics in the top-left corner during gameplay.
+
+**Default:** FPS display is **disabled** by default.
+
+**Enable FPS display:**
+```
+./galaga --show-fps
+```
+
+**Use cases:**
+- Performance monitoring and debugging
+- Verifying VSync is working correctly (should show 60 FPS or your display's refresh rate)
+- Diagnosing performance issues or frame drops
+- Comparing performance between different settings
+
+**Example - FPS display with VSync:**
+```
+./galaga --show-fps --vsync
+```
+
+### Target Frame Rate
+
+Control the game's target frame rate (FPS). The game will attempt to maintain this frame rate through frame limiting.
+
+**Default:** 60 FPS
+
+**Set custom frame rate:**
+```
+./galaga --fps=120   # High refresh rate displays
+./galaga --fps=30    # Lower performance systems
+./galaga --fps=144   # Gaming monitors
+```
+
+**Valid range:** 1-300 FPS
+
+**Notes:**
+- When VSync is enabled, the actual frame rate will be capped at your display's refresh rate
+- Higher FPS values provide smoother animation but require more CPU/GPU power
+- Lower FPS values reduce resource usage but may feel less responsive
+- Most displays are 60Hz, so 60 FPS is optimal for most users
+
+**Example - 120 FPS for high refresh rate display:**
+```
+./galaga --fps=120
+```
+
+### Audio Volume
+
+Control the game's audio volume at startup.
+
+**Default:** Volume is set to **32** (out of 128) for comfortable listening.
+
+**Set custom volume:**
+```
+./galaga --volume=64   # Half of maximum
+./galaga --volume=0    # Mute all sound
+./galaga --volume=128  # Maximum volume
+```
+
+**Valid range:** 0-128 (0 = silent, 128 = maximum)
+
+### Display Selection
+
+Select which display/monitor to use for the game.
+
+**Default:** Display 0 (primary monitor)
+
+**Set custom display:**
+```
+./galaga --display=1   # Use second monitor
+./galaga --display=2   # Use third monitor
+```
+
+**List available displays:**
+```
+./galaga --graphics-info
+```
+
+## Game Controls
+
+### Gameplay
+- **Left Arrow** - Move ship left
+- **Right Arrow** - Move ship right
+- **Space** - Fire bullets
+
+### System Controls
+- **ESC** - Quit game
+
+## Technical Details
+
+### Graphics
+- **Resolution:** 288×224 pixels (original Galaga arcade resolution)
+- **Scaling:** Window automatically scales to 90% of screen height while maintaining aspect ratio
+- **Rendering:** SDL2 with logical rendering for pixel-perfect scaling
+- **Sprites:** Extracted from original Galaga arcade sprite sheet
+- **Transparency:** Black color key for clean sprite rendering
+
+### Audio
+- **System:** SDL2_mixer for sound playback
+- **Channels:** 256 concurrent audio channels supported
+- **Volume:** Adjustable from 0-128
+
+### Gameplay
+- **Player Ship:** 15×15 pixels, 3 pixels/frame movement speed
+- **Enemies:** 16×16 pixels, 4 different types with 2 animation frames each
+- **Formation:** 6×4 grid (24 enemies) with oscillating movement
+- **Bullets:** 2×7 pixels, 6 pixels/frame speed, max 10 active
+- **Explosions:** 31×31 pixels, 5-frame animation
+- **Collision Detection:** AABB (Axis-Aligned Bounding Box) algorithm
 
 ## Project Structure
 
@@ -107,78 +210,25 @@ galaga/
 └── tools/               # Sprite extraction utilities
 ```
 
-## Technical Details
-
-### Graphics
-- **Resolution**: 288×224 pixels (original Galaga arcade resolution)
-- **Rendering**: SDL2 with logical rendering for automatic scaling
-- **Sprites**: Extracted from original Galaga sprite sheet
-- **Transparency**: Black color key for clean sprite rendering
-- **Frame Rate**: 60 FPS target with configurable VSync
-
-### Audio
-- **System**: SDL2_mixer for sound playback
-- **Format**: MP3 sound effects
-- **Channels**: 256 concurrent audio channels supported
-- **Volume**: Adjustable from 0-128
-
-### Game Logic
-- **Collision Detection**: AABB (Axis-Aligned Bounding Box) algorithm
-- **Movement**: Sub-pixel precision for smooth animation
-- **Enemy AI**: Oscillating formation movement with individual phase offsets
-- **Animation**: Frame-based sprite animation system
-
-## Sprite Information
-
-### Player Ship
-- Size: 15×15 pixels
-- Position: Sprite 6 at (109, 1)
-- Speed: 3 pixels per frame
-
-### Enemies
-- Size: 16×16 pixels
-- Types: 4 different enemy types
-- Animation: 2 frames per type
-- Movement: Sine wave oscillation (±10 pixels)
-
-### Bullets
-- Size: 2×7 pixels
-- Speed: 6 pixels per frame
-- Max Active: 10 bullets on screen
-
-### Explosions
-- Size: 31×31 pixels
-- Animation: 5 frames at 4 ticks per frame
-
 ## Development Tools
 
 The project includes sprite extraction utilities in the `tools/` directory:
 
-- **sprite_extractor**: Extracts sprite coordinates from sprite sheets
-- **sprite_viewer**: Visual sprite sheet browser
-- **debug_grid**: Debug utility for sprite sheet analysis
+- **sprite_extractor:** Extracts sprite coordinates from sprite sheets
+- **sprite_viewer:** Visual sprite sheet browser
+- **debug_grid:** Debug utility for sprite sheet analysis
 
 Build tools:
-```bash
-cd tools
-make
 ```
-
-## License
-
-This is an educational project recreating the classic Galaga arcade game.
+cd tools && make
+```
 
 ## Acknowledgments
 
 - Original Galaga by Namco (1981)
 - Sprite assets from arcade version
 - Built with SDL2 library
-- Created with assistance from Claude Code
-
-## Credits
-
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
 
 ---
 
-**Note**: This is a fan remake for educational purposes. Galaga is a trademark of Namco.
+**Note:** This is a fan remake for educational purposes. Galaga is a trademark of Namco.
