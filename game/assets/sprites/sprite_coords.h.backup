@@ -1,0 +1,262 @@
+/**
+ * @file sprite_coords.h
+ * @brief Sprite coordinates extracted from Galaga sprite sheet
+ *
+ * Auto-generated sprite coordinates for the Galaga sprite sheet.
+ * Each sprite is defined by its x, y position and width, height.
+ *
+ * Source: "Arcade - Galaga - Miscellaneous - General Sprites.png"
+ * Sprite sheet dimensions: 458x216
+ * Total sprites found: 229
+ *
+ * Note: Sprite 0 is the full image and should typically be ignored.
+ * Useful sprites start from index 1.
+ */
+
+#ifndef GAME_ASSETS_SPRITES_SPRITE_COORDS_H_
+#define GAME_ASSETS_SPRITES_SPRITE_COORDS_H_
+
+typedef struct {
+  int x;
+  int y;
+  int width;
+  int height;
+} sprite_rect_t;
+
+#define SPRITE_SHEET_WIDTH 458
+#define SPRITE_SHEET_HEIGHT 216
+#define SPRITE_COUNT 229
+
+static const sprite_rect_t galaga_sprites[SPRITE_COUNT] = {
+  {0, 0, 458, 216},      // Sprite 0 (Full image - ignore)
+  {214, 2, 4, 4},        // Sprite 1
+  {147, 3, 24, 27},      // Sprite 2
+  {180, 3, 7, 6},        // Sprite 3
+  {199, 3, 10, 6},       // Sprite 4
+  {248, 3, 7, 6},        // Sprite 5
+  {267, 3, 10, 6},       // Sprite 6
+  {428, 3, 2, 2},        // Sprite 7
+  {182, 4, 27, 27},      // Sprite 8
+  {250, 4, 27, 27},      // Sprite 9
+  {409, 5, 2, 2},        // Sprite 10
+  {411, 6, 3, 3},        // Sprite 11
+  {368, 9, 5, 7},        // Sprite 12
+  {373, 9, 6, 5},        // Sprite 13
+  {405, 9, 4, 3},        // Sprite 14
+  {159, 10, 17, 21},     // Sprite 15
+  {180, 10, 3, 2},       // Sprite 16
+  {248, 10, 3, 2},       // Sprite 17
+  {401, 10, 2, 2},       // Sprite 18
+  {206, 11, 3, 4},       // Sprite 19
+  {274, 11, 3, 4},       // Sprite 20
+  {333, 11, 12, 12},     // Sprite 21
+  {410, 11, 2, 2},       // Sprite 22
+  {412, 12, 3, 3},       // Sprite 23
+  {300, 13, 7, 7},       // Sprite 24
+  {373, 13, 2, 2},       // Sprite 25
+  {376, 13, 4, 5},       // Sprite 26
+  {368, 14, 2, 2},       // Sprite 27
+  {395, 14, 2, 2},       // Sprite 28
+  {398, 14, 3, 4},       // Sprite 29
+  {417, 14, 2, 2},       // Sprite 30
+  {365, 15, 8, 10},      // Sprite 31
+  {411, 15, 2, 2},       // Sprite 32
+  {416, 17, 3, 3},       // Sprite 33
+  {453, 17, 2, 2},       // Sprite 34
+  {375, 19, 6, 3},       // Sprite 35
+  {411, 19, 3, 2},       // Sprite 36
+  {397, 21, 2, 2},       // Sprite 37
+  {400, 21, 2, 2},       // Sprite 38
+  {415, 21, 3, 2},       // Sprite 39
+  {181, 22, 2, 2},       // Sprite 40
+  {249, 22, 2, 2},       // Sprite 41
+  {403, 22, 3, 3},       // Sprite 42
+  {413, 23, 3, 3},       // Sprite 43
+  {398, 24, 2, 2},       // Sprite 44
+  {409, 24, 2, 2},       // Sprite 45
+  {181, 25, 6, 6},       // Sprite 46
+  {249, 25, 6, 6},       // Sprite 47
+  {406, 25, 2, 2},       // Sprite 48
+  {214, 26, 2, 2},       // Sprite 49
+  {454, 28, 2, 2},       // Sprite 50
+  {200, 29, 2, 2},       // Sprite 51
+  {268, 29, 2, 2},       // Sprite 52
+  {56, 38, 14, 14},      // Sprite 53 - Enemy ship
+  {200, 38, 14, 14},     // Sprite 54 - Enemy ship
+  {304, 45, 18, 4},      // Sprite 55
+  {354, 45, 18, 4},      // Sprite 56
+  {404, 45, 18, 4},      // Sprite 57
+  {303, 48, 20, 4},      // Sprite 58
+  {353, 48, 20, 4},      // Sprite 59
+  {403, 48, 20, 4},      // Sprite 60
+  {302, 50, 22, 4},      // Sprite 61
+  {352, 50, 22, 4},      // Sprite 62
+  {402, 50, 22, 4},      // Sprite 63
+  {302, 53, 22, 4},      // Sprite 64
+  {352, 53, 22, 4},      // Sprite 65
+  {402, 53, 22, 4},      // Sprite 66
+  {56, 56, 14, 14},      // Sprite 67 - Enemy ship
+  {183, 56, 12, 14},     // Sprite 68
+  {301, 56, 24, 6},      // Sprite 69
+  {351, 56, 24, 6},      // Sprite 70
+  {401, 56, 24, 6},      // Sprite 71
+  {148, 57, 10, 13},     // Sprite 72
+  {165, 57, 12, 11},     // Sprite 73
+  {201, 57, 12, 12},     // Sprite 74
+  {218, 57, 14, 12},     // Sprite 75
+  {237, 57, 11, 12},     // Sprite 76
+  {255, 58, 13, 10},     // Sprite 77
+  {275, 58, 9, 10},      // Sprite 78
+  {300, 61, 26, 4},      // Sprite 79
+  {350, 61, 26, 4},      // Sprite 80
+  {400, 61, 26, 4},      // Sprite 81
+  {299, 64, 28, 6},      // Sprite 82
+  {349, 64, 28, 6},      // Sprite 83
+  {399, 64, 28, 6},      // Sprite 84
+  {299, 69, 28, 4},      // Sprite 85
+  {349, 69, 28, 4},      // Sprite 86
+  {399, 69, 28, 4},      // Sprite 87
+  {298, 72, 30, 4},      // Sprite 88
+  {348, 72, 30, 4},      // Sprite 89
+  {398, 72, 30, 4},      // Sprite 90
+  {39, 74, 12, 14},      // Sprite 91
+  {182, 74, 13, 14},     // Sprite 92
+  {218, 74, 14, 13},     // Sprite 93
+  {4, 75, 10, 13},       // Sprite 94 - Enemy animation frame
+  {21, 75, 12, 11},      // Sprite 95 - Enemy animation frame
+  {57, 75, 12, 12},      // Sprite 96 - Enemy animation frame
+  {74, 75, 14, 12},      // Sprite 97 - Enemy animation frame
+  {93, 75, 11, 12},      // Sprite 98 - Enemy animation frame
+  {148, 75, 10, 13},     // Sprite 99
+  {201, 75, 13, 13},     // Sprite 100
+  {238, 75, 11, 12},     // Sprite 101
+  {111, 76, 13, 10},     // Sprite 102
+  {131, 76, 9, 10},      // Sprite 103
+  {165, 76, 12, 11},     // Sprite 104
+  {255, 76, 13, 10},     // Sprite 105
+  {275, 76, 9, 10},      // Sprite 106
+  {297, 76, 32, 5},      // Sprite 107
+  {347, 76, 32, 5},      // Sprite 108
+  {397, 76, 32, 5},      // Sprite 109
+  {296, 80, 34, 4},      // Sprite 110
+  {346, 80, 34, 4},      // Sprite 111
+  {396, 80, 34, 4},      // Sprite 112
+  {295, 83, 36, 6},      // Sprite 113
+  {345, 83, 36, 6},      // Sprite 114
+  {395, 83, 36, 6},      // Sprite 115
+  {295, 88, 36, 4},      // Sprite 116
+  {345, 88, 36, 4},      // Sprite 117
+  {395, 88, 36, 4},      // Sprite 118
+  {294, 91, 38, 6},      // Sprite 119
+  {344, 91, 38, 6},      // Sprite 120
+  {394, 91, 38, 6},      // Sprite 121
+  {38, 92, 13, 14},      // Sprite 122
+  {74, 92, 14, 13},      // Sprite 123
+  {166, 92, 12, 11},     // Sprite 124
+  {183, 92, 10, 13},     // Sprite 125
+  {4, 93, 10, 13},       // Sprite 126 - Enemy animation frame
+  {57, 93, 13, 13},      // Sprite 127 - Enemy animation frame
+  {94, 93, 11, 12},      // Sprite 128 - Enemy animation frame
+  {148, 93, 11, 11},     // Sprite 129
+  {201, 93, 12, 10},     // Sprite 130
+  {218, 93, 10, 12},     // Sprite 131
+  {21, 94, 12, 11},      // Sprite 132
+  {111, 94, 13, 10},     // Sprite 133
+  {131, 94, 9, 10},      // Sprite 134
+  {236, 94, 11, 11},     // Sprite 135
+  {255, 94, 11, 11},     // Sprite 136
+  {293, 96, 40, 6},      // Sprite 137
+  {343, 96, 40, 6},      // Sprite 138
+  {393, 96, 40, 6},      // Sprite 139
+  {292, 101, 42, 4},     // Sprite 140
+  {342, 101, 42, 4},     // Sprite 141
+  {392, 101, 42, 4},     // Sprite 142
+  {291, 104, 44, 6},     // Sprite 143
+  {341, 104, 44, 6},     // Sprite 144
+  {391, 104, 44, 6},     // Sprite 145
+  {291, 109, 44, 4},     // Sprite 146
+  {341, 109, 44, 4},     // Sprite 147
+  {391, 109, 44, 4},     // Sprite 148
+  {22, 110, 12, 11},     // Sprite 149
+  {39, 110, 10, 13},     // Sprite 150
+  {4, 111, 11, 11},      // Sprite 151
+  {57, 111, 12, 10},     // Sprite 152
+  {74, 111, 10, 12},     // Sprite 153
+  {147, 111, 12, 11},    // Sprite 154
+  {238, 111, 11, 12},    // Sprite 155
+  {255, 111, 11, 12},    // Sprite 156
+  {92, 112, 11, 11},     // Sprite 157
+  {111, 112, 11, 11},    // Sprite 158
+  {165, 112, 12, 11},    // Sprite 159
+  {184, 112, 12, 12},    // Sprite 160
+  {202, 112, 11, 11},    // Sprite 161
+  {220, 112, 12, 12},    // Sprite 162
+  {313, 122, 3, 8},      // Sprite 163
+  {344, 122, 3, 7},      // Sprite 164
+  {348, 122, 5, 7},      // Sprite 165
+  {354, 122, 4, 7},      // Sprite 166
+  {367, 122, 4, 7},      // Sprite 167
+  {372, 122, 4, 7},      // Sprite 168
+  {385, 122, 4, 7},      // Sprite 169
+  {390, 122, 4, 7},      // Sprite 170
+  {399, 122, 4, 7},      // Sprite 171
+  {404, 122, 4, 7},      // Sprite 172
+  {417, 122, 4, 7},      // Sprite 173
+  {422, 122, 4, 7},      // Sprite 174
+  {294, 123, 7, 7},      // Sprite 175
+  {329, 123, 7, 7},      // Sprite 176
+  {3, 129, 12, 11},      // Sprite 177
+  {94, 129, 11, 12},     // Sprite 178
+  {111, 129, 11, 12},    // Sprite 179
+  {148, 129, 11, 11},    // Sprite 180
+  {166, 129, 11, 12},    // Sprite 181
+  {183, 129, 12, 12},    // Sprite 182
+  {201, 129, 11, 11},    // Sprite 183
+  {219, 129, 12, 12},    // Sprite 184
+  {21, 130, 12, 11},     // Sprite 185
+  {40, 130, 12, 12},     // Sprite 186
+  {58, 130, 11, 11},     // Sprite 187
+  {76, 130, 12, 12},     // Sprite 188
+  {237, 130, 12, 11},    // Sprite 189
+  {255, 130, 11, 11},    // Sprite 190
+  {313, 140, 3, 8},      // Sprite 191
+  {345, 140, 4, 7},      // Sprite 192
+  {350, 140, 4, 7},      // Sprite 193
+  {368, 140, 5, 7},      // Sprite 194
+  {374, 140, 4, 7},      // Sprite 195
+  {379, 140, 4, 7},      // Sprite 196
+  {384, 140, 4, 7},      // Sprite 197
+  {402, 140, 5, 7},      // Sprite 198
+  {408, 140, 4, 7},      // Sprite 199
+  {413, 140, 4, 7},      // Sprite 200
+  {418, 140, 4, 7},      // Sprite 201
+  {293, 141, 8, 3},      // Sprite 202
+  {329, 141, 8, 3},      // Sprite 203
+  {4, 147, 11, 11},      // Sprite 204
+  {22, 147, 11, 12},     // Sprite 205
+  {39, 147, 12, 12},     // Sprite 206
+  {57, 147, 11, 11},     // Sprite 207
+  {75, 147, 12, 12},     // Sprite 208
+  {93, 148, 12, 11},     // Sprite 209
+  {111, 148, 11, 11},    // Sprite 210
+  {294, 158, 7, 7},      // Sprite 211
+  {313, 158, 3, 8},      // Sprite 212
+  {329, 158, 7, 7},      // Sprite 213
+  {290, 173, 13, 14},    // Sprite 214
+  {440, 174, 4, 7},      // Sprite 215
+  {445, 174, 4, 7},      // Sprite 216
+  {147, 184, 13, 10},    // Sprite 217 - Number digit
+  {167, 184, 9, 10},     // Sprite 218 - Number digit
+  {183, 184, 13, 10},    // Sprite 219 - Number digit
+  {203, 184, 9, 10},     // Sprite 220 - Number digit
+  {219, 184, 13, 10},    // Sprite 221 - Number digit
+  {239, 184, 9, 10},     // Sprite 222 - Number digit
+  {147, 202, 13, 10},    // Sprite 223 - Number digit
+  {167, 202, 9, 10},     // Sprite 224 - Number digit
+  {183, 202, 13, 10},    // Sprite 225 - Number digit
+  {203, 202, 9, 10},     // Sprite 226 - Number digit
+  {219, 202, 13, 10},    // Sprite 227 - Number digit
+  {239, 202, 9, 10}      // Sprite 228 - Number digit
+};
+
+#endif  // GAME_ASSETS_SPRITES_SPRITE_COORDS_H_
