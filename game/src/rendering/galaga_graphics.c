@@ -7,8 +7,8 @@
 #include "logger.h"
 
 graphics_context_t init_graphics_context_with_logical_size(
-    int display, int window_width, int window_height,
-    int logical_width, int logical_height, bool vsync) {
+    int display, int window_width, int window_height, int logical_width,
+    int logical_height, bool vsync) {
   graphics_context_t graphics_context = {0};
 
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
@@ -64,10 +64,10 @@ graphics_context_t init_graphics_context_with_logical_size(
   // Create window with specified physical size, centered
   Uint32 window_flags = SDL_WINDOW_ALLOW_HIGHDPI;
 
-  graphics_context.window = SDL_CreateWindow(
-      "Galaga", SDL_WINDOWPOS_CENTERED_DISPLAY(display),
-      SDL_WINDOWPOS_CENTERED_DISPLAY(display), window_width, window_height,
-      window_flags);
+  graphics_context.window =
+      SDL_CreateWindow("Galaga", SDL_WINDOWPOS_CENTERED_DISPLAY(display),
+                       SDL_WINDOWPOS_CENTERED_DISPLAY(display), window_width,
+                       window_height, window_flags);
 
   if (!graphics_context.window) {
     LOG_SDL_ERROR("SDL_CreateWindow");
@@ -128,7 +128,7 @@ graphics_context_t init_graphics_context_with_logical_size(
 
   // Set logical size for automatic scaling
   if (SDL_RenderSetLogicalSize(graphics_context.renderer, logical_width,
-                                logical_height) != 0) {
+                               logical_height) != 0) {
     LOG_SDL_ERROR("SDL_RenderSetLogicalSize");
     abort();
   }

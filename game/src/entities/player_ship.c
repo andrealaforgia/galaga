@@ -8,7 +8,8 @@ player_ship_t init_player_ship(const graphics_context_ptr graphics_context,
   player_ship_t ship = {0};
 
   // Load sprite sheet texture
-  ship.sprite_sheet = load_texture(graphics_context->renderer, sprite_sheet_path);
+  ship.sprite_sheet =
+      load_texture(graphics_context->renderer, sprite_sheet_path);
   if (!ship.sprite_sheet.texture) {
     LOG_ERROR("Failed to load sprite sheet for player ship");
     return ship;
@@ -19,7 +20,8 @@ player_ship_t init_player_ship(const graphics_context_ptr graphics_context,
 
   // Position ship at bottom center of screen
   ship.x = (graphics_context->screen_width - sprite.width) / 2.0f;
-  ship.y = graphics_context->screen_height - sprite.height - 20;  // 20px from bottom
+  ship.y =
+      graphics_context->screen_height - sprite.height - 20;  // 20px from bottom
 
   LOG_INFO_FMT("Player ship initialized at (%.1f, %.1f)", ship.x, ship.y);
 
@@ -27,8 +29,8 @@ player_ship_t init_player_ship(const graphics_context_ptr graphics_context,
 }
 
 void update_player_ship(player_ship_t* ship,
-                       const keyboard_state_ptr keyboard_state,
-                       const graphics_context_ptr graphics_context) {
+                        const keyboard_state_ptr keyboard_state,
+                        const graphics_context_ptr graphics_context) {
   sprite_rect_t sprite = galaga_sprites[PLAYER_SHIP_SPRITE_INDEX];
 
   // Handle left movement
@@ -51,7 +53,7 @@ void update_player_ship(player_ship_t* ship,
 }
 
 void render_player_ship(const player_ship_t* ship,
-                       const graphics_context_ptr graphics_context) {
+                        const graphics_context_ptr graphics_context) {
   if (!ship->sprite_sheet.texture) {
     return;
   }
@@ -62,8 +64,10 @@ void render_player_ship(const player_ship_t* ship,
   // Set up source rectangle (from sprite sheet)
   SDL_Rect src_rect = {sprite.x, sprite.y, sprite.width, sprite.height};
 
-  // Set up destination rectangle (where to draw on screen) - using float for smooth movement
-  SDL_FRect dst_rect = {ship->x, ship->y, (float)sprite.width, (float)sprite.height};
+  // Set up destination rectangle (where to draw on screen) - using float for
+  // smooth movement
+  SDL_FRect dst_rect = {ship->x, ship->y, (float)sprite.width,
+                        (float)sprite.height};
 
   // Render the sprite with sub-pixel precision
   SDL_RenderCopyF(graphics_context->renderer, ship->sprite_sheet.texture,
@@ -75,9 +79,7 @@ float get_player_ship_center_x(const player_ship_t* ship) {
   return ship->x + sprite.width / 2.0f;
 }
 
-float get_player_ship_top_y(const player_ship_t* ship) {
-  return ship->y;
-}
+float get_player_ship_top_y(const player_ship_t* ship) { return ship->y; }
 
 void cleanup_player_ship(player_ship_t* ship) {
   if (ship->sprite_sheet.texture) {

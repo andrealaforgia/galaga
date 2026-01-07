@@ -3,12 +3,14 @@
 #include "../../assets/sprites/sprite_coords.h"
 #include "logger.h"
 
-bullet_manager_t init_bullet_manager(const graphics_context_ptr graphics_context,
-                                     const char* sprite_sheet_path) {
+bullet_manager_t init_bullet_manager(
+    const graphics_context_ptr graphics_context,
+    const char* sprite_sheet_path) {
   bullet_manager_t manager = {0};
 
   // Load sprite sheet texture
-  manager.sprite_sheet = load_texture(graphics_context->renderer, sprite_sheet_path);
+  manager.sprite_sheet =
+      load_texture(graphics_context->renderer, sprite_sheet_path);
   if (!manager.sprite_sheet.texture) {
     LOG_ERROR("Failed to load sprite sheet for bullets");
     return manager;
@@ -52,7 +54,7 @@ void update_bullets(bullet_manager_t* manager) {
 }
 
 void render_bullets(const bullet_manager_t* manager,
-                   const graphics_context_ptr graphics_context) {
+                    const graphics_context_ptr graphics_context) {
   if (!manager->sprite_sheet.texture) {
     return;
   }
@@ -66,12 +68,8 @@ void render_bullets(const bullet_manager_t* manager,
       SDL_Rect src_rect = {sprite.x, sprite.y, sprite.width, sprite.height};
 
       // Set up destination rectangle (where to draw on screen)
-      SDL_FRect dst_rect = {
-        manager->bullets[i].x,
-        manager->bullets[i].y,
-        (float)sprite.width,
-        (float)sprite.height
-      };
+      SDL_FRect dst_rect = {manager->bullets[i].x, manager->bullets[i].y,
+                            (float)sprite.width, (float)sprite.height};
 
       // Render the bullet sprite
       SDL_RenderCopyF(graphics_context->renderer, manager->sprite_sheet.texture,

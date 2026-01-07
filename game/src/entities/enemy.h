@@ -16,18 +16,19 @@
 #define ENEMY_FORMATION_COLS 6
 #define ENEMY_FORMATION_ROWS 4
 #define MAX_ENEMIES (ENEMY_FORMATION_COLS * ENEMY_FORMATION_ROWS)
-#define ENEMY_SPACING_X 30  // Increased to prevent overlap (16px sprite + 14px margin)
+#define ENEMY_SPACING_X \
+  30  // Increased to prevent overlap (16px sprite + 14px margin)
 #define ENEMY_SPACING_Y 20
 #define ENEMY_OSCILLATION_SPEED 0.05f
 #define ENEMY_OSCILLATION_AMPLITUDE 10.0f  // Reduced to prevent overlap
-#define ENEMY_ANIMATION_SPEED 15  // Frames between animation changes
+#define ENEMY_ANIMATION_SPEED 15           // Frames between animation changes
 
 typedef struct {
   float base_x;  // Base position in formation
   float base_y;
   float oscillation_offset;  // Time offset for oscillation
-  int type;  // 0-3 (enemy type)
-  int animation_frame;  // 0 or 1
+  int type;                  // 0-3 (enemy type)
+  int animation_frame;       // 0 or 1
   int animation_counter;
   bool active;
 } enemy_t;
@@ -53,7 +54,7 @@ void update_enemies(enemy_manager_t* manager);
  * Render all active enemies
  */
 void render_enemies(const enemy_manager_t* manager,
-                   const graphics_context_ptr graphics_context);
+                    const graphics_context_ptr graphics_context);
 
 /**
  * Get enemy at index (for collision detection)
@@ -63,7 +64,8 @@ enemy_t* get_enemy(enemy_manager_t* manager, int index);
 /**
  * Get current position of enemy (accounting for oscillation)
  */
-void get_enemy_position(const enemy_manager_t* manager, int index, float* x, float* y);
+void get_enemy_position(const enemy_manager_t* manager, int index, float* x,
+                        float* y);
 
 /**
  * Clean up enemy manager resources

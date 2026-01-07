@@ -3,18 +3,18 @@ CC = gcc
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Linux)
     PLATFORM = LINUX
-    INSTALL_CMD = sudo apt-get update && sudo apt-get install -y libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev
+    INSTALL_CMD = sudo apt-get update && sudo apt-get install -y libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
     DEV_INSTALL_CMD = sudo apt-get update && sudo apt-get install -y cpplint clang-format
 else ifeq ($(UNAME_S), Darwin)
     PLATFORM = OSX
-    INSTALL_CMD = brew install sdl2 sdl2_image sdl2_mixer
+    INSTALL_CMD = brew install sdl2 sdl2_image sdl2_mixer sdl2_ttf
     DEV_INSTALL_CMD = brew install cpplint clang-format
 else
     $(error Unsupported platform)
 endif
 
 SDL2_CFLAGS := $(shell sdl2-config --cflags)
-SDL2_LFLAGS := $(shell sdl2-config --libs) -lSDL2_image -lSDL2_mixer
+SDL2_LFLAGS := $(shell sdl2-config --libs) -lSDL2_image -lSDL2_mixer -lSDL2_ttf
 
 SRCDIR = .
 ENGINE_GRAPHICS_DIR = engine/core/graphics
@@ -52,7 +52,7 @@ INCLUDES = -I. \
            -I$(ENGINE_GRAPHICS_DIR) -I$(ENGINE_MATH_DIR) -I$(ENGINE_INPUT_DIR) -I$(ENGINE_AUDIO_DIR) -I$(ENGINE_TIME_DIR) -I$(ENGINE_UTILS_DIR) -I$(ENGINE_MEMORY_DIR) -I$(ENGINE_EVENTS_DIR) \
            -I$(GAME_ENTITIES_DIR) -I$(GAME_STAGES_DIR) -I$(GAME_MANAGERS_DIR) -I$(GAME_COLLISION_DIR) -I$(GAME_CONTROLLERS_DIR) -I$(GAME_RENDERING_DIR) -I$(GAME_AUDIO_DIR) -I$(GAME_SCORING_DIR) -I$(GAME_EVENTS_DIR) -I$(GAME_MAIN_DIR)
 
-CFLAGS := -ggdb3 -Ofast --std=c99 -Wall -Wextra -pedantic-errors $(INCLUDES) $(SDL2_CFLAGS)
+CFLAGS := -ggdb3 -O3 -ffast-math --std=c99 -Wall -Wextra -pedantic-errors $(INCLUDES) $(SDL2_CFLAGS)
 LFLAGS := $(SDL2_LFLAGS) -lm
 
 TARGET = galaga

@@ -2,8 +2,8 @@
 
 #include <SDL.h>
 
-#include "game_constants.h"
 #include "galaga_graphics.h"
+#include "game_constants.h"
 #include "logger.h"
 
 game_t init_game(game_settings_t game_settings) {
@@ -25,13 +25,13 @@ game_t init_game(game_settings_t game_settings) {
   int window_width = (int)(window_height * ((double)GAME_WIDTH / GAME_HEIGHT));
 
   LOG_INFO_FMT("Game resolution: %dx%d", GAME_WIDTH, GAME_HEIGHT);
-  LOG_INFO_FMT("Window size: %dx%d (%.0f%% of screen height)",
-               window_width, window_height, WINDOW_SCALE_PERCENTAGE * 100);
+  LOG_INFO_FMT("Window size: %dx%d (%.0f%% of screen height)", window_width,
+               window_height, WINDOW_SCALE_PERCENTAGE * 100);
 
   // Initialize graphics with scaled window
   game.graphics_context = init_graphics_context_with_logical_size(
-      game_settings.display, window_width, window_height,
-      GAME_WIDTH, GAME_HEIGHT, game_settings.vsync);
+      game_settings.display, window_width, window_height, GAME_WIDTH,
+      GAME_HEIGHT, game_settings.vsync);
 
   // Initialize keyboard
   game.keyboard_state = init_keyboard_state();

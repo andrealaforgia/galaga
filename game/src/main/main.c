@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include "../../assets/sprites/sprite_coords.h"
 #include "bullet.h"
 #include "command_line.h"
 #include "enemy.h"
@@ -13,24 +14,22 @@
 #include "keyboard.h"
 #include "logger.h"
 #include "player_ship.h"
-#include "../../assets/sprites/sprite_coords.h"
 
 // Sound effect indices
 #define SOUND_SHOOT 0
 #define SOUND_EXPLOSION 1
 
 // Simple AABB collision detection
-static bool check_collision(float x1, float y1, float w1, float h1,
-                           float x2, float y2, float w2, float h2) {
-  return x1 < x2 + w2 && x1 + w1 > x2 &&
-         y1 < y2 + h2 && y1 + h1 > y2;
+static bool check_collision(float x1, float y1, float w1, float h1, float x2,
+                            float y2, float w2, float h2) {
+  return x1 < x2 + w2 && x1 + w1 > x2 && y1 < y2 + h2 && y1 + h1 > y2;
 }
 
 static void run_game(const game_ptr game) {
   // Initialize player ship
-  player_ship_t ship = init_player_ship(
-      &game->graphics_context,
-      "game/assets/sprites/Arcade - Galaga - Miscellaneous - General Sprites.png");
+  player_ship_t ship = init_player_ship(&game->graphics_context,
+                                        "game/assets/sprites/Arcade - Galaga - "
+                                        "Miscellaneous - General Sprites.png");
 
   if (!ship.sprite_sheet.texture) {
     LOG_ERROR("Failed to initialize player ship");
@@ -38,9 +37,10 @@ static void run_game(const game_ptr game) {
   }
 
   // Initialize bullet manager
-  bullet_manager_t bullet_manager = init_bullet_manager(
-      &game->graphics_context,
-      "game/assets/sprites/Arcade - Galaga - Miscellaneous - General Sprites.png");
+  bullet_manager_t bullet_manager =
+      init_bullet_manager(&game->graphics_context,
+                          "game/assets/sprites/Arcade - Galaga - Miscellaneous "
+                          "- General Sprites.png");
 
   if (!bullet_manager.sprite_sheet.texture) {
     LOG_ERROR("Failed to initialize bullet manager");
@@ -49,9 +49,10 @@ static void run_game(const game_ptr game) {
   }
 
   // Initialize enemy manager
-  enemy_manager_t enemy_manager = init_enemy_manager(
-      &game->graphics_context,
-      "game/assets/sprites/Arcade - Galaga - Miscellaneous - General Sprites.png");
+  enemy_manager_t enemy_manager =
+      init_enemy_manager(&game->graphics_context,
+                         "game/assets/sprites/Arcade - Galaga - Miscellaneous "
+                         "- General Sprites.png");
 
   if (!enemy_manager.sprite_sheet.texture) {
     LOG_ERROR("Failed to initialize enemy manager");
@@ -61,9 +62,10 @@ static void run_game(const game_ptr game) {
   }
 
   // Initialize explosion manager
-  explosion_manager_t explosion_manager = init_explosion_manager(
-      &game->graphics_context,
-      "game/assets/sprites/Arcade - Galaga - Miscellaneous - General Sprites.png");
+  explosion_manager_t explosion_manager =
+      init_explosion_manager(&game->graphics_context,
+                             "game/assets/sprites/Arcade - Galaga - "
+                             "Miscellaneous - General Sprites.png");
 
   if (!explosion_manager.sprite_sheet.texture) {
     LOG_ERROR("Failed to initialize explosion manager");
@@ -75,14 +77,12 @@ static void run_game(const game_ptr game) {
 
   // Load sound effects
   if (!load_sound(&game->audio_context, SOUND_SHOOT,
-                  "game/assets/sounds/split_effects",
-                  "sound_effect_01.mp3")) {
+                  "game/assets/sounds/split_effects", "sound_effect_01.mp3")) {
     LOG_ERROR("Failed to load shoot sound effect");
   }
 
   if (!load_sound(&game->audio_context, SOUND_EXPLOSION,
-                  "game/assets/sounds/split_effects",
-                  "sound_effect_02.mp3")) {
+                  "game/assets/sounds/split_effects", "sound_effect_02.mp3")) {
     LOG_ERROR("Failed to load explosion sound effect");
   }
 
@@ -111,7 +111,8 @@ static void run_game(const game_ptr game) {
     bool space_is_pressed = is_space_key_pressed(&game->keyboard_state);
     if (space_is_pressed && !space_was_pressed) {
       // Fire bullet from center of ship
-      float bullet_x = get_player_ship_center_x(&ship) - 1.0f;  // Center the 2px bullet
+      float bullet_x =
+          get_player_ship_center_x(&ship) - 1.0f;  // Center the 2px bullet
       float bullet_y = get_player_ship_top_y(&ship);
       fire_bullet(&bullet_manager, bullet_x, bullet_y);
 
@@ -141,17 +142,17 @@ static void run_game(const game_ptr game) {
             get_enemy_position(&enemy_manager, j, &enemy_x, &enemy_y);
 
             // Check collision (using 16x16 for enemy size)
-            if (check_collision(bullet->x, bullet->y,
-                              bullet_sprite.width, bullet_sprite.height,
-                              enemy_x, enemy_y, 16, 16)) {
+            if (check_collision(bullet->x, bullet->y, bullet_sprite.width,
+                                bullet_sprite.height, enemy_x, enemy_y, 16,
+                                16)) {
               // Collision detected!
               bullet->active = false;
               enemy->active = false;
 
               // Create explosion at enemy center
               create_explosion(&explosion_manager,
-                             enemy_x + 8.0f,  // Center of 16px wide enemy
-                             enemy_y + 8.0f);  // Center of 16px high enemy
+                               enemy_x + 8.0f,   // Center of 16px wide enemy
+                               enemy_y + 8.0f);  // Center of 16px high enemy
 
               // Play explosion sound
               play_sound(&game->audio_context, SOUND_EXPLOSION);

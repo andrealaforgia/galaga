@@ -30,8 +30,8 @@ typedef struct {
 /**
  * Initialize the bullet manager
  */
-bullet_manager_t init_bullet_manager(const graphics_context_ptr graphics_context,
-                                     const char* sprite_sheet_path);
+bullet_manager_t init_bullet_manager(
+    const graphics_context_ptr graphics_context, const char* sprite_sheet_path);
 
 /**
  * Fire a bullet from the given position
@@ -47,7 +47,7 @@ void update_bullets(bullet_manager_t* manager);
  * Render all active bullets
  */
 void render_bullets(const bullet_manager_t* manager,
-                   const graphics_context_ptr graphics_context);
+                    const graphics_context_ptr graphics_context);
 
 /**
  * Get bullet at index (for collision detection)

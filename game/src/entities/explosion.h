@@ -32,8 +32,8 @@ typedef struct {
 /**
  * Initialize the explosion manager
  */
-explosion_manager_t init_explosion_manager(const graphics_context_ptr graphics_context,
-                                           const char* sprite_sheet_path);
+explosion_manager_t init_explosion_manager(
+    const graphics_context_ptr graphics_context, const char* sprite_sheet_path);
 
 /**
  * Create an explosion at the given position
@@ -49,7 +49,7 @@ void update_explosions(explosion_manager_t* manager);
  * Render all active explosions
  */
 void render_explosions(const explosion_manager_t* manager,
-                      const graphics_context_ptr graphics_context);
+                       const graphics_context_ptr graphics_context);
 
 /**
  * Clean up explosion manager resources

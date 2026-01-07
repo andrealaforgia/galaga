@@ -3,12 +3,14 @@
 #include "../../assets/sprites/sprite_coords.h"
 #include "logger.h"
 
-explosion_manager_t init_explosion_manager(const graphics_context_ptr graphics_context,
-                                           const char* sprite_sheet_path) {
+explosion_manager_t init_explosion_manager(
+    const graphics_context_ptr graphics_context,
+    const char* sprite_sheet_path) {
   explosion_manager_t manager = {0};
 
   // Load sprite sheet texture
-  manager.sprite_sheet = load_texture(graphics_context->renderer, sprite_sheet_path);
+  manager.sprite_sheet =
+      load_texture(graphics_context->renderer, sprite_sheet_path);
   if (!manager.sprite_sheet.texture) {
     LOG_ERROR("Failed to load sprite sheet for explosions");
     return manager;
@@ -60,7 +62,7 @@ void update_explosions(explosion_manager_t* manager) {
 }
 
 void render_explosions(const explosion_manager_t* manager,
-                      const graphics_context_ptr graphics_context) {
+                       const graphics_context_ptr graphics_context) {
   if (!manager->sprite_sheet.texture) {
     return;
   }
@@ -78,12 +80,9 @@ void render_explosions(const explosion_manager_t* manager,
 
       // Set up destination rectangle (where to draw on screen)
       // Center the explosion on the given position
-      SDL_FRect dst_rect = {
-        explosion->x - sprite.width / 2.0f,
-        explosion->y - sprite.height / 2.0f,
-        (float)sprite.width,
-        (float)sprite.height
-      };
+      SDL_FRect dst_rect = {explosion->x - sprite.width / 2.0f,
+                            explosion->y - sprite.height / 2.0f,
+                            (float)sprite.width, (float)sprite.height};
 
       // Render the explosion sprite
       SDL_RenderCopyF(graphics_context->renderer, manager->sprite_sheet.texture,

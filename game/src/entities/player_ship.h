@@ -33,14 +33,14 @@ player_ship_t init_player_ship(const graphics_context_ptr graphics_context,
  * Update player ship (handle input and movement)
  */
 void update_player_ship(player_ship_t* ship,
-                       const keyboard_state_ptr keyboard_state,
-                       const graphics_context_ptr graphics_context);
+                        const keyboard_state_ptr keyboard_state,
+                        const graphics_context_ptr graphics_context);
 
 /**
  * Render the player ship
  */
 void render_player_ship(const player_ship_t* ship,
-                       const graphics_context_ptr graphics_context);
+                        const graphics_context_ptr graphics_context);
 
 /**
  * Get the center X position of the ship (for bullet firing)

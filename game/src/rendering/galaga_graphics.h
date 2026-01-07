@@ -25,7 +25,7 @@
  * @return Initialized graphics context
  */
 graphics_context_t init_graphics_context_with_logical_size(
-    int display, int window_width, int window_height,
-    int logical_width, int logical_height, bool vsync);
+    int display, int window_width, int window_height, int logical_width,
+    int logical_height, bool vsync);
 
 #endif  // GAME_SRC_RENDERING_GALAGA_GRAPHICS_H_
