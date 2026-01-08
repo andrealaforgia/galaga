@@ -18,7 +18,8 @@ int main(int argc, char* argv[]) {
     return 1;
   }
 
-  printf("Image: %dx%d, BPP: %d\n", surface->w, surface->h, surface->format->BytesPerPixel);
+  printf("Image: %dx%d, BPP: %d\n", surface->w, surface->h,
+         surface->format->BytesPerPixel);
 
   // Count different pixel types in first 100x100 area
   int transparent_count = 0;
@@ -27,7 +28,8 @@ int main(int argc, char* argv[]) {
 
   for (int y = 0; y < 100 && y < surface->h; y++) {
     for (int x = 0; x < 100 && x < surface->w; x++) {
-      Uint8* p = (Uint8*)surface->pixels + y * surface->pitch + x * surface->format->BytesPerPixel;
+      Uint8* p = (Uint8*)surface->pixels + y * surface->pitch +
+                 x * surface->format->BytesPerPixel;
       Uint32 pixel = *(Uint32*)p;
 
       Uint8 r, g, b, a;
@@ -40,7 +42,8 @@ int main(int argc, char* argv[]) {
       } else {
         colored_count++;
         if (colored_count <= 10) {
-          printf("Colored pixel at (%d, %d): R=%d G=%d B=%d A=%d\n", x, y, r, g, b, a);
+          printf("Colored pixel at (%d, %d): R=%d G=%d B=%d A=%d\n", x, y, r, g,
+                 b, a);
         }
       }
     }

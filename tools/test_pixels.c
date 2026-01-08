@@ -23,23 +23,24 @@ int main(int argc, char* argv[]) {
 
   // Sample some pixels that should be grid lines
   int test_positions[][2] = {
-    {0, 0}, {17, 0}, {18, 0}, {35, 0}, {36, 0},  // Top row
-    {0, 17}, {0, 18}, {0, 35}, {0, 36},  // Left column
-    {100, 50}, {100, 68}, {100, 69}  // Middle area
+      {0, 0},    {17, 0},   {18, 0},  {35, 0}, {36, 0},  // Top row
+      {0, 17},   {0, 18},   {0, 35},  {0, 36},           // Left column
+      {100, 50}, {100, 68}, {100, 69}                    // Middle area
   };
 
   for (int i = 0; i < sizeof(test_positions) / sizeof(test_positions[0]); i++) {
     int x = test_positions[i][0];
     int y = test_positions[i][1];
 
-    Uint8* p = (Uint8*)surface->pixels + y * surface->pitch + x * surface->format->BytesPerPixel;
+    Uint8* p = (Uint8*)surface->pixels + y * surface->pitch +
+               x * surface->format->BytesPerPixel;
     Uint32 pixel = *(Uint32*)p;
 
     Uint8 r, g, b, a;
     SDL_GetRGBA(pixel, surface->format, &r, &g, &b, &a);
 
-    printf("Pixel (%3d, %3d): R=%3d G=%3d B=%3d A=%3d | Avg=%3d\n",
-           x, y, r, g, b, a, (r + g + b) / 3);
+    printf("Pixel (%3d, %3d): R=%3d G=%3d B=%3d A=%3d | Avg=%3d\n", x, y, r, g,
+           b, a, (r + g + b) / 3);
   }
 
   SDL_FreeSurface(surface);

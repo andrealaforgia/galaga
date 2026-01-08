@@ -45,10 +45,9 @@ HEADERS = $(wildcard $(SRCDIR)/*.h) \
           $(wildcard $(ENGINE_GRAPHICS_DIR)/*.h) $(wildcard $(ENGINE_MATH_DIR)/*.h) $(wildcard $(ENGINE_INPUT_DIR)/*.h) $(wildcard $(ENGINE_AUDIO_DIR)/*.h) $(wildcard $(ENGINE_TIME_DIR)/*.h) $(wildcard $(ENGINE_UTILS_DIR)/*.h) $(wildcard $(ENGINE_MEMORY_DIR)/*.h) $(wildcard $(ENGINE_EVENTS_DIR)/*.h) \
           $(wildcard $(GAME_ENTITIES_DIR)/*.h) $(wildcard $(GAME_STAGES_DIR)/*.h) $(wildcard $(GAME_MANAGERS_DIR)/*.h) $(wildcard $(GAME_COLLISION_DIR)/*.h) $(wildcard $(GAME_CONTROLLERS_DIR)/*.h) $(wildcard $(GAME_RENDERING_DIR)/*.h) $(wildcard $(GAME_AUDIO_DIR)/*.h) $(wildcard $(GAME_SCORING_DIR)/*.h) $(wildcard $(GAME_EVENTS_DIR)/*.h) $(wildcard $(GAME_MAIN_DIR)/*.h)
 
-# Game-only source and header files for linting and formatting (excluding engine)
-GAME_SRC = $(wildcard $(GAME_ENTITIES_DIR)/*.c) $(wildcard $(GAME_STAGES_DIR)/*.c) $(wildcard $(GAME_MANAGERS_DIR)/*.c) $(wildcard $(GAME_COLLISION_DIR)/*.c) $(wildcard $(GAME_CONTROLLERS_DIR)/*.c) $(wildcard $(GAME_RENDERING_DIR)/*.c) $(wildcard $(GAME_AUDIO_DIR)/*.c) $(wildcard $(GAME_SCORING_DIR)/*.c) $(wildcard $(GAME_EVENTS_DIR)/*.c) $(wildcard $(GAME_MAIN_DIR)/*.c)
-
-GAME_HEADERS = $(wildcard $(GAME_ENTITIES_DIR)/*.h) $(wildcard $(GAME_STAGES_DIR)/*.h) $(wildcard $(GAME_MANAGERS_DIR)/*.h) $(wildcard $(GAME_COLLISION_DIR)/*.h) $(wildcard $(GAME_CONTROLLERS_DIR)/*.h) $(wildcard $(GAME_RENDERING_DIR)/*.h) $(wildcard $(GAME_AUDIO_DIR)/*.h) $(wildcard $(GAME_SCORING_DIR)/*.h) $(wildcard $(GAME_EVENTS_DIR)/*.h) $(wildcard $(GAME_MAIN_DIR)/*.h)
+# Find all source and header files, excluding the engine directory
+LINT_FORMAT_SRC = $(shell find . -name "*.c" -not -path "./engine/*")
+LINT_FORMAT_HEADERS = $(shell find . -name "*.h" -not -path "./engine/*")
 
 OBJ = $(SRC:.c=.o)
 
@@ -81,13 +80,13 @@ dev_install:
 	$(DEV_INSTALL_CMD)
 
 lint:
-	cpplint --filter=-build/include_subdir,-legal/copyright,-runtime/threadsafe_fn --root=. $(GAME_SRC) $(GAME_HEADERS)
+	cpplint --filter=-build/include_subdir,-legal/copyright,-runtime/threadsafe_fn --root=. $(LINT_FORMAT_SRC) $(LINT_FORMAT_HEADERS)
 
 clean:
 	rm -f $(OBJ) $(TARGET)
 
 format:
-	clang-format -i -style=Google $(GAME_SRC) $(GAME_HEADERS)
+	clang-format -i -style=Google $(LINT_FORMAT_SRC) $(LINT_FORMAT_HEADERS)
 
 show_sdl_config:
 	@echo "Checking SDL2 Configuration..."

@@ -80,7 +80,8 @@ static Uint32 get_pixel(SDL_Surface* surface, int x, int y) {
 }
 
 // Find a grid cell (rectangle bounded by grid lines)
-static sprite_rect_t find_grid_cell(SDL_Surface* surface, int start_x, int start_y) {
+static sprite_rect_t find_grid_cell(SDL_Surface* surface, int start_x,
+                                    int start_y) {
   sprite_rect_t rect = {start_x, start_y, 0, 0};
 
   // Find right edge (next grid line or image edge)
@@ -140,8 +141,8 @@ static sprite_list_t extract_sprites(SDL_Surface* surface) {
         sprite_rect_t cell = find_grid_cell(surface, x, y);
 
         // Only add cells that are reasonable sprite sizes
-        if (cell.width >= 3 && cell.height >= 3 &&
-            cell.width <= 100 && cell.height <= 100) {
+        if (cell.width >= 3 && cell.height >= 3 && cell.width <= 100 &&
+            cell.height <= 100) {
           add_sprite(&list, cell);
         }
       }
