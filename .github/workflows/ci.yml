@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          build-essential \
+          libsdl2-dev \
+          libsdl2-image-dev \
+          libsdl2-mixer-dev \
+          libsdl2-ttf-dev \
+          cpplint \
+          clang-format
+
+    - name: Verify SDL2 configuration
+      run: make show_sdl_config
+
+    - name: Format check
+      run: |
+        make format
+        # Check if formatting changed anything
+        if ! git diff --exit-code; then
+          echo "Code formatting issues found. Please run 'make format' locally."
+          exit 1
+        fi
+
+    - name: Lint code
+      run: make lint
+
+    - name: Build project
+      run: make
+
+    - name: Clean build artifacts
+      run: make clean
